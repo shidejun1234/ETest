@@ -1,0 +1,10 @@
+<view class='page'>
+    <view class='options'>
+        <block wx:for='{{optionsList}}'>
+            <view class='item'>
+            <image src='{{item.img}}' mode='widthFix'></image>
+            <text>{{item.name}}</text>
+            </view>
+        </block>
+    </view>
+</view>

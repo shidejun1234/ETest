@@ -1,0 +1,21 @@
+<!--pages/my/my.wxml-->
+<view class='personal_info' wx:if='{{isLogin}}'>
+    <view class='photo_wrap'>
+        <image src='{{userInfo.avatarUrl}}'></image>
+    </view>
+    <view class='nickname'>
+        {{userInfo.nickName}}
+    </view>
+</view>
+<view class='personal_info' wx:else>
+    <view class='photo_wrap'>
+        <image src='../../images/user-unlogin.png'></image>
+        <button open-type='getUserInfo' lang='zh_CN' bindgetuserinfo='onGotUserInfo'></button>
+    </view>
+</view>
+<view class='wode_item_wrap'>
+    <view class='wode_item' wx:for='{{mode}}' wx:key='*this'>
+        {{item}}
+        <image src='../../images/icon-arrow.png'></image>
+    </view>
+</view>
