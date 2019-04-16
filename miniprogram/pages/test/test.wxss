@@ -1,0 +1,382 @@
+.ptop {
+    width: 95%;
+    height: 80rpx;
+    margin: 20rpx auto;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #e5e5e5;
+    background: #fff;
+}
+
+.ptop view {
+    width: 30%;
+    height: 60rpx;
+    line-height: 60rpx;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.ptop .type text {
+    display: block;
+    width: 70%;
+    height: 60rpx;
+    font-size: 30rpx;
+    border-radius: 30rpx;
+    color: #fff;
+    background: #8facc6;
+}
+
+.ptop .pages {
+    font-size: 30rpx;
+    text-align: right;
+}
+
+.ptop .pages text {
+    font-size: 35rpx;
+    color: #8facc6;
+}
+
+.body {
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 30rpx;
+}
+
+.body .title {
+    font-weight: bold;
+}
+
+.body .options {
+    display: flex;
+    flex-direction: column;
+}
+
+.body .options image {
+    width: 60rpx;
+    height: 60rpx;
+    position: absolute;
+    margin-left: 3.5rpx;
+    margin-top: 1rpx;
+}
+
+.body .options .item {
+    margin: 30rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.body .options .item .key {
+    width: 70rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: center;
+    border: 1px solid #e5e5e5;
+    border-radius: 40rpx;
+}
+
+.body .options .item .val {
+    width: 100%;
+    line-height: 60rpx;
+    padding-left: 20rpx;
+}
+
+.body .answer {
+    width: 95%;
+    margin: 30rpx;
+    font-size: 40rpx;
+    font-weight: bold;
+}
+
+.body .answer text {
+    font-size: 60rpx;
+    color: #198f1f;
+}
+
+.body .btn {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.body .btn button {
+    width: 36%;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    font-size: 30rpx;
+    border: 1px solid #e5e5e5;
+    border-radius: 50rpx;
+    background: #eeeae7;
+}
+
+button::after {
+    border: 0;
+}
+
+.bottom {
+    width: 95%;
+    height: 90rpx;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    display: flex;
+    z-index: 1;
+    flex-direction: row;
+    border-top: 1px solid #e5e5e5;
+}
+
+.bottom view {
+    width: 50%;
+    height: 80rpx;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.bottom image {
+    width: 70rpx;
+    height: 70rpx;
+    margin-top: 10rpx;
+    margin-right: 30rpx;
+    float: left;
+}
+
+.bottom .right text {
+    display: block;
+    width: 50%;
+    height: 70rpx;
+    line-height: 70rpx;
+    margin-top: 10rpx;
+    font-size: 30rpx;
+    border-radius: 35rpx;
+    float: right;
+    color: #fff;
+    background: #8facc6;
+}
+
+.feedback {
+    width: 80%;
+    position: absolute;
+    bottom: 30%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 600rpx;
+    border: 1px solid #e5e5e5;
+    border-radius: 10rpx;
+    background: #fff;
+    z-index: 99;
+}
+
+.feedback text {
+    width: 100%;
+    height: 80rpx;
+    line-height: 80rpx;
+    font-weight: bold;
+    font-size: 35rpx;
+    margin-bottom: 30rpx;
+    display: block;
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.feedback textarea {
+    width: 90%;
+    margin: 0 auto;
+    padding: 10rpx;
+    border-radius: 10rpx;
+    border: 1px solid #e5e5e5;
+}
+
+.feedback view {
+    width: 100%;
+    height: 80rpx;
+    margin-top: 30rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.feedback view .left {
+    width: 200rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    background: #198f1f;
+    color: #fff;
+    border-radius: 40rpx;
+}
+
+.feedback view .right {
+    width: 200rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    border-radius: 40rpx;
+    border: #e5e5e5;
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: #000;
+    opacity: 0.5;
+    z-index: 98;
+}
+
+.menu {
+    width: 80%;
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 80%;
+    border: 1px solid #e5e5e5;
+    border-radius: 10rpx;
+    background: #fff;
+    z-index: 99;
+}
+
+.menu .top {
+    margin: 10rpx;
+    margin-bottom: 50rpx;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.menu text {
+    display: block;
+    width: 100%;
+}
+
+.menu image {
+    width: 50rpx;
+    height: 50rpx;
+}
+
+.menu .items {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.menu .item {
+    width: 50rpx;
+    height: 50rpx;
+    text-align: center;
+    line-height: 50rpx;
+    font-size: 25rpx;
+    margin: 10rpx;
+    border: 1px solid #e5e5e5;
+    border-radius: 30rpx;
+}
+
+.notice {
+    width: 80%;
+    position: absolute;
+    bottom: 40%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 500rpx;
+    border: 1px solid #e5e5e5;
+    border-radius: 10rpx;
+    background: #fff;
+    z-index: 99;
+}
+
+.notice .top {
+    margin: 10rpx;
+    margin-bottom: 50rpx;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.notice .top text {
+    display: block;
+    font-weight: bold;
+    width: 100%;
+}
+
+.notice .centent {
+    text-align: center;
+}
+
+.notice .btn{
+    margin-top: 50rpx;
+}
+
+.notice button {
+    width: 50%;
+    height: 80rpx;
+    line-height: 80rpx;
+    border-radius: 40rpx;
+    margin-top: 30rpx;
+}
+
+.result {
+    width: 80%;
+    position: absolute;
+    bottom: 40%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 500rpx;
+    z-index: 99;
+    text-align: center;
+}
+
+.result .content{  
+    width: 80%;  
+    height: 400rpx;
+    margin: 0 auto;
+    padding-top: 50rpx;
+    border: 1px solid #e5e5e5;
+    border-radius: 10rpx;
+    background: #fff;
+}
+
+.result image{
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: -80rpx;
+}
+
+.result button{
+    margin-top: 50rpx;
+    width: 50%;
+    height: 80rpx;
+    line-height: 80rpx;
+    border-radius: 40rpx;
+    background: #facb59;
+    color: #ffffff;
+}
+
+.green {
+    color: #198f1f;
+}
+
+.green-bg {
+    background: #198f1f;
+    color: #ffffff;
+}
+
+.red {
+    color: #ca3b2b;
+}
+
+.blue{
+    font-size: 60rpx;
+    color: #4e8bf5;
+}
+
+.orange{
+    color: #e15f27;
+}

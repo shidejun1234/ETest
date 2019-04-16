@@ -1,10 +1,16 @@
-<view class='page'>
-    <view class='options'>
-        <block wx:for='{{optionsList}}'>
-            <view class='item'>
-            <image src='{{item.img}}' mode='widthFix'></image>
-            <text>{{item.name}}</text>
-            </view>
-        </block>
+<image class='bg' src='../../images/bg_index.jpg'></image>
+<scroll-view class='body' scroll-y='true'>
+    <view class='page'>
+        <picker class='picker' mode='selector' value='{{index}}' range='{{testList}}' range-key='name' bindchange='testChange'>
+            当前选择：{{testList[index].name}}
+        </picker>
+        <view class='options'>
+            <block wx:for='{{optionsList}}' wx:key='{{item.id}}'>
+                <view class='item'>
+                    <image src='{{item.img}}' mode='widthFix'></image>
+                    <text>{{item.name}}</text>
+                </view>
+            </block>
+        </view>
     </view>
-</view>
+</scroll-view>
