@@ -1,4 +1,4 @@
-<view class='ptop'>
+<view class='head'>
     <view class='type'>
         <text>{{testList[current].type}}</text>
     </view>
@@ -54,7 +54,7 @@
         <image src='../../images/cancel.png' bindtap='hiddenMenu'></image>
     </view>
     <view class='items'>
-        <block wx:for='5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555' wx:key='{{index}}'>
+        <block wx:for='{{testList}}' wx:key='{{index}}'>
             <view class='item {{testList[index].checkAnswer!=""?"green-bg":""}}' bindtap='toTest' data-key='{{index}}'>{{index+1}}</view>
         </block>
     </view>
@@ -83,7 +83,7 @@
         <view wx:if='{{score>=80}}'>考试通过</view>
         <view wx:else>考试未通过，继续努力</view>
         <view><text class='blue'>{{score}}</text><text class='orange'>分</text></view>
-        <view>用时:20分45秒</view>
+        <view>用时:{{useM}}分{{useS}}秒</view>
         <button bindtap='hiddenResult'>返回</button>
     </view>
 </view>

@@ -1,16 +1,20 @@
 <image class='bg' src='../../images/bg_index.jpg'></image>
 <scroll-view class='body' scroll-y='true'>
-    <view class='page'>
-        <picker class='picker' mode='selector' value='{{index}}' range='{{testList}}' range-key='name' bindchange='testChange'>
-            当前选择：{{testList[index].name}}
-        </picker>
-        <view class='options'>
-            <block wx:for='{{optionsList}}' wx:key='{{item.id}}'>
-                <view class='item'>
-                    <image src='{{item.img}}' mode='widthFix'></image>
-                    <text>{{item.name}}</text>
-                </view>
-            </block>
-        </view>
+    <picker class='picker {{red?"red":""}}' mode='selector' value='{{pIndex}}' range='{{testList}}' range-key='name' bindchange='testChange'>
+        当前选择：{{testList[pIndex].name}}
+    </picker>
+    <view class='options'>
+        <block wx:for='{{optionsList}}' wx:key='{{item.id}}'>
+            <view class='item' bindtap='nav' data-url='{{item.url}}'>
+                <image src='{{item.img}}' mode='widthFix'></image>
+                <text>{{item.name}}</text>
+            </view>
+        </block>
     </view>
 </scroll-view>
+<view class='per' wx:if='{{showPer}}'>
+    <image src='../../images/logo.png'></image>
+    <view>易考|模拟考试</view>
+    <button class='green-bg' open-type='getUserInfo' lang='zh_CN' bindgetuserinfo='onGotUserInfo'>一键微信授权</button>
+</view>
+<view class='mask' wx:if='{{showMask}}'></view>

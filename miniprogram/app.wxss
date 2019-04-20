@@ -1,5 +1,27 @@
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 0;
     height: 0;
     color: transparent;
+}
+
+.green {
+    color: #198f1f;
+}
+
+.green-bg {
+    background: #198f1f;
+    color: #fff;
+}
+
+.red {
+    color: #ca3b2b;
+}
+
+.blue {
+    font-size: 60rpx;
+    color: #4e8bf5;
+}
+
+.orange {
+    color: #e15f27;
 }

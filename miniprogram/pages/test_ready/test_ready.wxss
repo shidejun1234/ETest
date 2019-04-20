@@ -1,0 +1,157 @@
+.head {
+    width: 100%;
+    height: 100rpx;
+    margin-bottom: 200rpx;
+    line-height: 100rpx;
+    padding-left: 30rpx;
+    background: #f3f3f3;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.bar {
+    width: 80%;
+    height: 170rpx;
+    margin: 80rpx auto;
+    display: flex;
+    flex-direction: row;
+    border-radius: 20rpx;
+    border: 1px solid #e5e5e5;
+    box-shadow: 5rpx 5rpx 5rpx #888;
+}
+
+.bar .icon {
+    display: block;
+    width: 110rpx;
+    height: 110rpx;
+    margin: 30rpx;
+}
+
+.bar .right {
+    height: 110rpx;
+    margin: 30rpx 0rpx;
+    font-size: 32rpx;
+    line-height: 55rpx;
+}
+
+.bar .top {
+    height: 55rpx;
+    font-weight: bold;
+}
+
+.bar .bottom {
+    height: 55rpx;
+    color: #aaa;
+}
+
+.bar .vip {
+    display: block;
+    width: 110rpx;
+    height: 110rpx;
+    position: absolute;
+    right: 10%;
+}
+
+.start {
+    width: 80%;
+    height: 170rpx;
+    line-height: 170rpx;
+    margin-top: 80rpx;
+    text-align: center;
+    border-radius: 20rpx;
+    box-shadow: 5rpx 5rpx 5rpx #888;
+}
+
+.toast {
+    width: 80%;
+    position: absolute;
+    top: 20%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 750rpx;
+    border: 1px solid #e5e5e5;
+    border-radius: 10rpx;
+    background: #fff;
+    z-index: 99;
+    text-align: center;
+}
+
+.toast .cancel{
+    width: 40rpx;
+    height: 40rpx;
+    position: absolute;
+    top: 20rpx;
+    right: 20rpx;
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: #000;
+    opacity: 0.5;
+    z-index: 98;
+}
+
+.toast .photo_wrap {
+    width: 140rpx;
+    height: 140rpx;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 20rpx auto;
+    border-radius: 70rpx;
+}
+
+.toast .photo_wrap:after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 10rpx 10rpx #fff inset;
+    border-radius: 65rpx;
+}
+
+.toast .photo_wrap image {
+    width: 140rpx;
+    height: 140rpx;
+    border-radius: 70rpx;
+}
+
+.toast .tab {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 40rpx;
+    font-size: 35rpx;
+}
+
+.toast .tab .left {
+    width: 40%;
+    color: #aaaaaa;
+}
+
+.toast .tab .right {
+    width: 60%;
+    text-align: left;
+}
+
+.toast button {
+    width: 60%;
+    height: 80rpx;
+    line-height: 80rpx;
+    margin-top: 50rpx;
+    background: #8facc6;
+    color: #fff;
+    border-radius: 20rpx;
+}
+
+button::after {
+    border: 0;
+}

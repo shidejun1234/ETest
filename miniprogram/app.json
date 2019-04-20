@@ -1,17 +1,19 @@
 {
     "pages": [
-        "pages/test/test",
         "pages/index/index",
+        "pages/test_ready/test_ready",
+        "pages/test/test",
         "pages/my/my"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#8facc6",
-        "navigationBarTitleText": "云开发 QuickStart",
-        "navigationBarTextStyle": "black"
+        "navigationBarTitleText": "易考|模拟考试",
+        "navigationBarTextStyle": "write"
     },
     "tabBar": {
+        "selectedColor": "#8facc6",
         "list": [
             {
                 "pagePath": "pages/index/index",

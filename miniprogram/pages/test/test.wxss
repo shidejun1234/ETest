@@ -1,4 +1,4 @@
-.ptop {
+.head {
     width: 95%;
     height: 80rpx;
     margin: 20rpx auto;
@@ -8,7 +8,7 @@
     background: #fff;
 }
 
-.ptop view {
+.head view {
     width: 30%;
     height: 60rpx;
     line-height: 60rpx;
@@ -16,7 +16,7 @@
     text-align: center;
 }
 
-.ptop .type text {
+.head .type text {
     display: block;
     width: 70%;
     height: 60rpx;
@@ -26,12 +26,12 @@
     background: #8facc6;
 }
 
-.ptop .pages {
+.head .pages {
     font-size: 30rpx;
     text-align: right;
 }
 
-.ptop .pages text {
+.head .pages text {
     font-size: 35rpx;
     color: #8facc6;
 }
@@ -357,26 +357,4 @@ button::after {
     border-radius: 40rpx;
     background: #facb59;
     color: #ffffff;
-}
-
-.green {
-    color: #198f1f;
-}
-
-.green-bg {
-    background: #198f1f;
-    color: #ffffff;
-}
-
-.red {
-    color: #ca3b2b;
-}
-
-.blue{
-    font-size: 60rpx;
-    color: #4e8bf5;
-}
-
-.orange{
-    color: #e15f27;
 }

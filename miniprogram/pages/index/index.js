@@ -1,120 +1,159 @@
+let request = require('../../utils/request.js');
+let app = getApp();
+let api = app.globalData.api;
+let id = '';
+let openid = '';
+let cur_subject = '';
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        index: 0,
+        api: api,
+        red: false,
+        isLogin: false,
+        showPer: false,
+        showMask: false,
         optionsList: [{
             id: 1,
             name: '模拟考试',
             img: '../../images/test-bar.png',
-            src: ''
+            url: '../test_ready/test_ready'
         }, {
             id: 2,
             name: '快速搜题',
             img: '../../images/search-bar.png',
-            src: ''
+            url: ''
         }, {
             id: 3,
             name: '模拟考试',
             img: '../../images/user-unlogin.png',
-            src: ''
+            url: ''
         }, {
             id: 4,
             name: '模拟考试',
             img: '../../images/user-unlogin.png',
-            src: ''
-        }, {
-            id: 3,
-            name: '模拟考试',
-            img: '../../images/user-unlogin.png',
-            src: ''
-        }, {
-            id: 4,
-            name: '模拟考试',
-            img: '../../images/user-unlogin.png',
-            src: ''
-        }, {
-            id: 3,
-            name: '模拟考试',
-            img: '../../images/user-unlogin.png',
-            src: ''
-        }, {
-            id: 4,
-            name: '模拟考试',
-            img: '../../images/user-unlogin.png',
-            src: ''
-        }],
-        testList: [{
-            id: 1,
-            name: '计算机',
-        }, {
-            id: 2,
-            name: '英语',
+            url: ''
         }]
     },
 
+    onLoad() {
+        wx.login({
+            success: (res) => {
+                request.getOpenId(res.code)
+                    .then(res => {
+                        openid = res.data.openid;
+                        wx.getSetting({
+                            success: (res) => {
+                                if (!res.authSetting['scope.userInfo'] || !wx.getStorageSync('userInfo')) {
+                                    this.setData({
+                                        showPer: true,
+                                        showMask: true
+                                    })
+                                } else {
+                                    this.login(wx.getStorageSync('userInfo'));
+                                }
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            }
+        })
+    },
+
+    nav(e) {
+        if (!this.data.pIndex) {
+            wx.showToast({
+                title: '请选择科目',
+                icon: 'none'
+            })
+            this.setData({
+                red: true
+            });
+            return;
+        }
+        let url = e.currentTarget.dataset.url;
+        wx.navigateTo({
+            url: url,
+        })
+    },
+
     testChange(e) {
-        console.log(e);
+        let key = e.detail.value
         this.setData({
-            index: e.detail.value
+            pIndex: e.detail.value,
+            red: false
         });
+        request.setCurSubject(this.data.testList[key].id,id)
+        .then(res=>{
+            console.log(res)
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+        app.globalData.subject = this.data.testList[key];
     },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function(options) {
-
+    onGotUserInfo(e) {
+        if (!this.data.isLogin) {
+            this.setData({
+                showPer: false,
+                showMask: false
+            })
+            if (e.detail.userInfo) {
+                let userInfo = e.detail.userInfo;
+                this.login(userInfo);
+                wx.setStorageSync('userInfo', userInfo);
+                this.setData({
+                    isLogin: true
+                });
+            } else {
+                this.onLoad();
+            }
+        }
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function() {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function() {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function() {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function() {
-
+    login(userInfo) {
+        request.login(openid, userInfo)
+            .then(res => {
+                id = res.data.id;
+                cur_subject = res.data.cur_subject;
+            })
+            .then(() => {
+                return request.getSubject()
+            })
+            .then(res => {
+                if (res.code === 200) {
+                    this.setData({
+                        testList: res.data
+                    });
+                    return res.data;
+                } else {
+                    wx.showToast({
+                        title: res.message,
+                    })
+                    return 0;
+                }
+            })
+            .then((res) => {
+                if (res != 0) {
+                    res.some((item, index) => {
+                        if (item.id == cur_subject) {
+                            this.setData({
+                                pIndex: index
+                            })
+                            app.globalData.subject = this.data.testList[index];
+                            return true;
+                        }
+                    })
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            });
     }
+
 })

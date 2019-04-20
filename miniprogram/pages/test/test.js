@@ -1,4 +1,5 @@
 // pages/test/test.js
+let time1;
 Page({
 
     data: {
@@ -12,10 +13,11 @@ Page({
         showMase: false,
         amount: 0,
         showNotice: false,
-        showResult:false
+        showResult: false
     },
 
     onLoad: function(options) {
+        console.log(options)
         let time = 60 * 90;
         this.getTime(time);
         let testList = this.data.testList;
@@ -28,7 +30,7 @@ Page({
                 this.showNotice();
                 return;
             }
-        }else{
+        } else {
             this.hiddenNotice();
         }
         let score = 0;
@@ -39,11 +41,23 @@ Page({
                 score += 1;
             }
         }
-        this.setData({
-            score: score
-        });
+        score = score / answerList.length * 100;
+        score = Math.round(score);
         this.showResult();
-        console.log(score)
+        clearInterval(time1);
+        let useM = 89 - this.data.time.split(':')[0];
+        if (useM < 10) {
+            useM = '0' + useM;
+        }
+        let useS = 60 - this.data.time.split(':')[1];
+        if (useS < 10) {
+            useS = '0' + useS;
+        }
+        this.setData({
+            score: score,
+            useM: useM,
+            useS: useS
+        });
     },
 
     showResult() {
@@ -58,6 +72,9 @@ Page({
             showResult: false,
             showMask: false
         });
+        wx.navigateBack({
+
+        })
     },
 
     showNotice() {
@@ -202,7 +219,7 @@ Page({
             }],
             answer: 'B'
         }];
-        for (let i = 2; i < 100; i++) {
+        for (let i = 2; i < 12; i++) {
             let ll = [{
                 id: i + 1,
                 title: i + 1 + '你是不是个智障',
@@ -233,7 +250,7 @@ Page({
     },
 
     getTime(time) {
-        let time1 = setInterval(() => {
+        time1 = setInterval(() => {
             time -= 1;
             let m = parseInt(time / 60);
             let s = parseInt(time % 60);
