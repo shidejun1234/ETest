@@ -1,0 +1,17 @@
+<view class='head'>我的试卷</view>
+<view class='body'>
+    <block wx:for='{{testList}}' wx:key='{{item.id}}'>
+        <view class='test'>
+            <image src='../../images/test2.png'></image>
+            <view class='item1'>{{index+1}}</view>
+            <view class='item2'>
+                <view>得分：{{item.score}}分</view>
+                <view class='time'>用时 {{item.use_time}}</view>
+            </view>
+            <view class='item3'>
+                <button class='btn green-bg' bindtap='rewinding' data-id='{{item.id}}'>复卷</button>
+                <view class='time'>{{item.create_time}}</view>
+            </view>
+        </view>
+    </block>
+</view>

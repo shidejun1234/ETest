@@ -1,5 +1,5 @@
 <view class='head'>{{subject.name}}</view>
-<view class='bar'>
+<view class='bar' bindtap='myTest'>
     <image class='icon' src='../../images/test.png'></image>
     <view class='right'>
         <view class='top'>我的试卷</view>

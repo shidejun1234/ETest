@@ -1,8 +1,6 @@
 let request = require('../../utils/request.js');
-let nowTime = require('../../utils/nowTime.js');
 let app = getApp();
 let api = app.globalData.api;
-let time1;
 Page({
 
     data: {
@@ -14,106 +12,29 @@ Page({
         showMenu: false,
         showMase: false,
         amount: 0,
-        showNotice: false,
-        showResult: false
     },
 
     onLoad: function(options) {
         wx.showLoading({
             title: '试题加载中'
         })
-        let test = JSON.parse(options.test);
-        let time = 60 * test.time;
-        this.setData({
-            test: test
-        });
-        this.getTime(time);
         let testList = this.data.testList;
-        this.setTest(testList, test);
+        this.setTest(testList,options.id);
     },
 
-    setTest(testList, test) {
-        request.getQuestion(test.subject, test.num)
+    setTest(testList,id) {
+        request.getRewinding(id)
             .then((res) => {
-                let answerList = [];
-                for (let i = 0; i < res.data.length; i++) {
-                    testList[i] = res.data[i];
-                    testList[i].check = false;
-                    testList[i].checkAnswer = '';
-                    answerList[i] = res.data[i].answer;
-                }
+                let question = JSON.parse(res.data.question)
                 this.setData({
-                    testList: testList,
-                    total: testList.length,
-                    answerList: answerList,
-                    create_time: nowTime.formatTime(new Date())
+                    testList: question,
+                    total: question.length,
                 });
                 wx.hideLoading();
             })
             .catch((error) => {
                 console.log(error)
             })
-    },
-
-    submit(e) {
-        if (!e.currentTarget.dataset.key) {
-            if (this.data.total !== this.data.amount) {
-                this.showNotice();
-                return;
-            }
-        } else {
-            this.hiddenNotice();
-        }
-        let score = 0;
-        let answerList = this.data.answerList;
-        let checkAnswerList = this.data.checkAnswerList;
-        for (let i = 0; i < answerList.length; i++) {
-            if (answerList[i] === checkAnswerList[i]) {
-                score += 1;
-            }
-        }
-        score = score / answerList.length * 100;
-        score = Math.round(score);
-        this.showResult();
-        clearInterval(time1);
-        let useM = this.data.test.time - 1 - this.data.time.split(':')[0];
-        if (useM < 10) {
-            useM = '0' + useM;
-        }
-        let useS = 60 - this.data.time.split(':')[1];
-        if (useS < 10) {
-            useS = '0' + useS;
-        }
-        this.setData({
-            score: score,
-            useM: useM,
-            useS: useS
-        });
-        let test = this.data.test;
-        test.user = app.globalData.user;
-        test.score = score;
-        test.use_time = `${useM}分${useS}秒`;
-        test.create_time = this.data.create_time;
-        test.question = this.data.testList;
-        let list = JSON.stringify(test);
-        request.setTest(list);
-    },
-
-    showResult() {
-        this.setData({
-            showResult: true,
-            showMask: true
-        });
-    },
-
-    hiddenResult() {
-        this.setData({
-            showResult: false,
-            showMask: false
-        });
-        wx.navigateBack({
-
-        })
     },
 
     showNotice() {
@@ -173,6 +94,7 @@ Page({
             });
             return;
         }
+        console.log(this.data.testList[this.data.current].id)
         this.hiddenFeedback();
         wx.showToast({
             title: '提交成功',
@@ -224,26 +146,6 @@ Page({
             checkAnswerList: checkAnswerList,
             amount: this.data.amount + 1
         });
-    },
-
-    getTime(time) {
-        time1 = setInterval(() => {
-            let m = parseInt(time / 60);
-            let s = parseInt(time % 60);
-            if (m < 10) {
-                m = '0' + m;
-            }
-            if (s < 10) {
-                s = '0' + s;
-            }
-            this.setData({
-                time: `${m}:${s}`
-            });
-            if (time == 0) {
-                clearInterval(time1)
-            }
-            time -= 1;
-        }, 1000);
     },
 
     trim(str) {

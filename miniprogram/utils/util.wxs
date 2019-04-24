@@ -1,0 +1,8 @@
+var filter = {
+    getOptions: function(options) {
+        return JSON.parse(options);
+    }
+}
+module.exports = {
+    getOptions: filter.getOptions
+}

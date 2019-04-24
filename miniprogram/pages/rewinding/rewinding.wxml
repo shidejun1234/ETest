@@ -3,7 +3,6 @@
     <view class='type'>
         <text>{{testList[current].type}}</text>
     </view>
-    <view class='time'>{{time}}</view>
     <view class='pages'>
         <text>{{current+1}}</text>/{{total}}</view>
 </view>
@@ -35,10 +34,9 @@
 <view class='bottom'>
     <view class='left'>
         <image src='../../images/feedback.png' bindtap='showFeedback'></image>
-        <image src='../../images/menu.png' bindtap='showMenu'></image>
     </view>
     <view class='right'>
-        <text bindtap='submit'>提交答案</text>
+        <image src='../../images/menu.png' bindtap='showMenu'></image>
     </view>
 </view>
 <form class='feedback' wx:if='{{showFeedback}}' bindsubmit="doFeedback">
@@ -58,34 +56,6 @@
         <block wx:for='{{testList}}' wx:key='{{index}}'>
             <view class='item {{testList[index].checkAnswer!=""?"green-bg":""}}' bindtap='toTest' data-key='{{index}}'>{{index+1}}</view>
         </block>
-    </view>
-</view>
-<view class='notice' wx:if='{{showNotice}}'>
-    <view class='top'>
-        <text>操作提示</text>
-    </view>
-    <view class='centent'>
-        <view>
-            当前还有
-            <text class='green'>{{total-amount}}</text> 题未作答,
-        </view>
-        <view>
-            是否确认提交？
-        </view>
-    </view>
-    <view class='btn'>
-        <button class='green-bg' bindtap='submit' data-key='sub'>提交试卷</button>
-        <button bindtap='hiddenNotice'>取消</button>
-    </view>
-</view>
-<view class='result' wx:if='{{showResult}}'>
-    <image src='../../images/ribbon.png' mode='widthFix'></image>
-    <view class='content'>
-        <view wx:if='{{score>=80}}'>考试通过</view>
-        <view wx:else>考试未通过，继续努力</view>
-        <view><text class='blue'>{{score}}</text><text class='orange'>分</text></view>
-        <view>用时:{{useM}}分{{useS}}秒</view>
-        <button bindtap='hiddenResult'>返回</button>
     </view>
 </view>
 <view class='mask' wx:if='{{showMask}}'></view>

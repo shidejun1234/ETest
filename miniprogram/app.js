@@ -10,8 +10,11 @@ App({
         }
 
         this.globalData = {
-            subject:'',
-            api:'http://localhost/onetest/index/api/'
+            subject: '',
+            login: 0,
+            user: 0,
+            api: 'http://localhost/etest3/index/api/'
+            // api: 'https://e.fslujiaoxiang.cn/jiameng/zzshufulei/etest/index/api/'
         }
     },
 })

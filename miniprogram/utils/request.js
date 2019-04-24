@@ -64,7 +64,7 @@ let login = (openid, userInfo) => {
 
 
 let setCurSubject = (cur_subject, id) => {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
         wx.request({
             url: `${api}setCurSubject`,
             method: 'POST',
@@ -86,9 +86,118 @@ let setCurSubject = (cur_subject, id) => {
     });
 }
 
+let getTest = (subject) => {
+    return new Promise(function(resolve, reject) {
+        wx.request({
+            url: `${api}getTest`,
+            data: {
+                subject: subject
+            },
+            success: (res) => {
+                if (res) {
+                    resolve(res.data);
+                } else {
+                    reject('error');
+                }
+            }
+        });
+    });
+}
+
+let getQuestion = (subject, num) => {
+    return new Promise(function(resolve, reject) {
+        wx.request({
+            url: `${api}getQuestion`,
+            data: {
+                subject: subject,
+                num: num
+            },
+            success: (res) => {
+                if (res) {
+                    resolve(res.data);
+                } else {
+                    reject('error');
+                }
+            }
+        });
+    });
+}
+
+let setTest = (list) => {
+    return new Promise(function(resolve, reject) {
+        wx.request({
+            url: `${api}setTest`,
+            method: 'POST',
+            header: {
+                "content-type": "application/x-www-form-urlencoded"
+            },
+            data: {
+                list: list
+            },
+            success: (res) => {
+                if (res) {
+                    resolve(res.data);
+                } else {
+                    reject('error');
+                }
+            }
+        });
+    });
+}
+
+let getMyText = (user, subject) => {
+    return new Promise(function(resolve, reject) {
+        wx.request({
+            url: `${api}getMyText`,
+            method: 'POST',
+            header: {
+                "content-type": "application/x-www-form-urlencoded"
+            },
+            data: {
+                user: user,
+                subject: subject
+            },
+            success: (res) => {
+                if (res) {
+                    resolve(res.data);
+                } else {
+                    reject('error');
+                }
+            }
+        });
+    });
+}
+
+let getRewinding = (id) => {
+    return new Promise(function(resolve, reject) {
+        wx.request({
+            url: `${api}getRewinding`,
+            method: 'POST',
+            header: {
+                "content-type": "application/x-www-form-urlencoded"
+            },
+            data: {
+                id: id
+            },
+            success: (res) => {
+                if (res) {
+                    resolve(res.data);
+                } else {
+                    reject('error');
+                }
+            }
+        });
+    });
+}
+
 module.exports = {
     getSubject: getSubject,
     getOpenId: getOpenId,
     login: login,
-    setCurSubject: setCurSubject
+    setCurSubject: setCurSubject,
+    getTest: getTest,
+    getQuestion: getQuestion,
+    setTest: setTest,
+    getMyText: getMyText,
+    getRewinding: getRewinding
 }

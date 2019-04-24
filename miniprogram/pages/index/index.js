@@ -38,7 +38,10 @@ Page({
         }]
     },
 
-    onLoad() {
+    onShow() {
+        if (app.globalData.login === 1) {
+            return;
+        }
         wx.login({
             success: (res) => {
                 request.getOpenId(res.code)
@@ -52,6 +55,9 @@ Page({
                                         showMask: true
                                     })
                                 } else {
+                                    wx.showLoading({
+                                        title: '页面加载中'
+                                    })
                                     this.login(wx.getStorageSync('userInfo'));
                                 }
                             }
@@ -65,7 +71,7 @@ Page({
     },
 
     nav(e) {
-        if (!this.data.pIndex) {
+        if (!(this.data.pIndex + 1)) {
             wx.showToast({
                 title: '请选择科目',
                 icon: 'none'
@@ -87,13 +93,13 @@ Page({
             pIndex: e.detail.value,
             red: false
         });
-        request.setCurSubject(this.data.testList[key].id,id)
-        .then(res=>{
-            console.log(res)
-        })
-        .catch(error=>{
-            console.log(error);
-        })
+        request.setCurSubject(this.data.testList[key].id, id)
+            .then(res => {
+                console.log(res)
+            })
+            .catch(error => {
+                console.log(error);
+            })
         app.globalData.subject = this.data.testList[key];
     },
 
@@ -111,7 +117,7 @@ Page({
                     isLogin: true
                 });
             } else {
-                this.onLoad();
+                this.onShow();
             }
         }
     },
@@ -120,13 +126,14 @@ Page({
         request.login(openid, userInfo)
             .then(res => {
                 id = res.data.id;
+                app.globalData.user = id;
                 cur_subject = res.data.cur_subject;
             })
             .then(() => {
                 return request.getSubject()
             })
             .then(res => {
-                if (res.code === 200) {
+                if (res.code === 0) {
                     this.setData({
                         testList: res.data
                     });
@@ -145,11 +152,15 @@ Page({
                             this.setData({
                                 pIndex: index
                             })
-                            app.globalData.subject = this.data.testList[index];
+                            app.globalData.subject = res[index];
                             return true;
                         }
                     })
                 }
+            })
+            .then(() => {
+                app.globalData.login = 1;
+                wx.hideLoading();
             })
             .catch(error => {
                 console.log(error)
