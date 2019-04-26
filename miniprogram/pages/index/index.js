@@ -12,9 +12,8 @@ Page({
     data: {
         api: api,
         red: false,
-        isLogin: false,
         showPer: false,
-        showMask: false,
+        showMask: true,
         optionsList: [{
             id: 1,
             name: '模拟考试',
@@ -24,17 +23,7 @@ Page({
             id: 2,
             name: '快速搜题',
             img: '../../images/search-bar.png',
-            url: ''
-        }, {
-            id: 3,
-            name: '模拟考试',
-            img: '../../images/user-unlogin.png',
-            url: ''
-        }, {
-            id: 4,
-            name: '模拟考试',
-            img: '../../images/user-unlogin.png',
-            url: ''
+            url: '../search/search'
         }]
     },
 
@@ -42,6 +31,9 @@ Page({
         if (app.globalData.login === 1) {
             return;
         }
+        wx.showLoading({
+            title: '页面加载中'
+        })
         wx.login({
             success: (res) => {
                 request.getOpenId(res.code)
@@ -54,10 +46,8 @@ Page({
                                         showPer: true,
                                         showMask: true
                                     })
+                                    wx.hideLoading();
                                 } else {
-                                    wx.showLoading({
-                                        title: '页面加载中'
-                                    })
                                     this.login(wx.getStorageSync('userInfo'));
                                 }
                             }
@@ -104,7 +94,7 @@ Page({
     },
 
     onGotUserInfo(e) {
-        if (!this.data.isLogin) {
+        if (app.globalData.login===0) {
             this.setData({
                 showPer: false,
                 showMask: false
@@ -113,10 +103,10 @@ Page({
                 let userInfo = e.detail.userInfo;
                 this.login(userInfo);
                 wx.setStorageSync('userInfo', userInfo);
-                this.setData({
-                    isLogin: true
-                });
             } else {
+                this.setData({
+                    showMask: true
+                })
                 this.onShow();
             }
         }
@@ -150,7 +140,8 @@ Page({
                     res.some((item, index) => {
                         if (item.id == cur_subject) {
                             this.setData({
-                                pIndex: index
+                                pIndex: index,
+                                showMask: false
                             })
                             app.globalData.subject = res[index];
                             return true;
@@ -165,6 +156,13 @@ Page({
             .catch(error => {
                 console.log(error)
             });
+    },
+
+    onShareAppMessage: function() {
+        return {
+            title: '模拟考试综合性在线学习平台',
+            path: '/pages/index/index'
+        }
     }
 
 })

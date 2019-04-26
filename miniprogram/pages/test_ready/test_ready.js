@@ -22,13 +22,6 @@ Page({
                     wx.switchTab({
                         url: '../index/index',
                     })
-                } else {
-                    let userInfo = wx.getStorageSync('userInfo');
-                    if (userInfo) {
-                        this.setData({
-                            userInfo: userInfo
-                        });
-                    }
                 }
             }
         });
@@ -64,7 +57,7 @@ Page({
             })
     },
 
-    myTest(){
+    myTest() {
         wx.navigateTo({
             url: '../my_test/my_test',
         })

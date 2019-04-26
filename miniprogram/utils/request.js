@@ -190,6 +190,26 @@ let getRewinding = (id) => {
     });
 }
 
+let searchQuestion = (key, subject) => {
+    return new Promise(function(resolve, reject) {
+        wx.request({
+            url: `${api}searchQuestion`,
+            method: 'GET',
+            data: {
+                key: key,
+                subject: subject
+            },
+            success: (res) => {
+                if (res) {
+                    resolve(res.data);
+                } else {
+                    reject('error');
+                }
+            }
+        });
+    });
+}
+
 module.exports = {
     getSubject: getSubject,
     getOpenId: getOpenId,
@@ -199,5 +219,6 @@ module.exports = {
     getQuestion: getQuestion,
     setTest: setTest,
     getMyText: getMyText,
-    getRewinding: getRewinding
+    getRewinding: getRewinding,
+    searchQuestion: searchQuestion
 }

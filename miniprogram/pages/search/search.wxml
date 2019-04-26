@@ -1,0 +1,34 @@
+<wxs module="filter" src="../../utils/util.wxs"></wxs>
+<view class='search-input'>
+    <input name="input" placeholder="请输入要搜索的关键词" value='{{searchkey}}' bindinput='searchInput' />
+    <image src='../../images/search.png' bindtap='search'></image>
+</view>
+<view class='tips' wx:if="{{isSearch}}">
+    <view class='tips-left'>与
+        <text>{{searchkey}}</text>相关的试题</view>
+    <view class='tips-right'>共:{{total}}题</view>
+</view>
+<block wx:for="{{searchList}}" wx:key="index">
+    <view class='body'>
+        <view class='title'>
+            <text>{{index+1}}、</text>
+            <block wx:for="{{item.title}}" wx:key="index">
+                <text style='{{item.key?"color:#ce0c0c;":""}}'>{{item.str}}</text>
+            </block>
+        </view>
+        <view class='options'>
+            <block wx:for='{{filter.getOptions(item.options)}}' wx:for-item="answer" wx:key='{{index}}'>
+                <view class='item' data-key='{{answer.key}}'>
+                    <view wx:if='{{answer.key==item.answer}}'>
+                        <image src='../../images/yes.png'></image>
+                    </view>
+                    <view class='key'>{{answer.key}}</view>
+                    <view class='val {{answer.key==item.answer?answer.key==item.answer?"green":"red":""}}'>{{answer.val}}</view>
+                </view>
+            </block>
+        </view>
+        <view class='answer'>
+            正确答案：{{item.answer}}
+        </view>
+    </view>
+</block>

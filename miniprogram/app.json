@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/index/index",
+        "pages/search/search",
         "pages/rewinding/rewinding",
         "pages/my_test/my_test",
         "pages/test_ready/test_ready",

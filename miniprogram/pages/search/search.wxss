@@ -1,0 +1,121 @@
+.search-input {
+    width: 90%;
+    height: 80rpx;
+    margin: 20rpx auto;
+    display: flex;
+    flex-direction: row;
+    background: #f5f5f5;
+    border-radius: 10rpx;
+}
+
+.search-input input {
+    width: 100%;
+    height: 80rpx;
+    line-height: 80rpx;
+    padding-left: 20rpx;
+}
+
+.search-input image {
+    display: block;
+    width: 60rpx;
+    height: 60rpx;
+    margin: 10rpx;
+}
+
+.tips {
+    width: 90%;
+    height: 80rpx;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    font-size: 35rpx;
+}
+
+.tips .tips-left {
+    width: 80%;
+}
+
+.tips .tips-left text {
+    color: #ce0c0c;
+}
+
+.tips .tips-right {
+    width: 20%;
+}
+
+.body {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 20rpx;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.body .title {
+    font-size: 35rpx;
+    margin-bottom: 20rpx;
+}
+
+.body .options {
+    display: flex;
+    flex-direction: column;
+}
+
+.body .options image {
+    width: 60rpx;
+    height: 60rpx;
+    position: absolute;
+    margin-left: 3.5rpx;
+    margin-top: 1rpx;
+}
+
+.body .options .item {
+    margin: 30rpx;
+    margin-top: 10rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.body .options .item .key {
+    width: 70rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: center;
+    border: 1px solid #e5e5e5;
+    border-radius: 40rpx;
+}
+
+.body .options .item .val {
+    width: 100%;
+    line-height: 60rpx;
+    padding-left: 20rpx;
+}
+
+.body .answer {
+    width: 95%;
+    margin: 30rpx;
+    margin-top: 0;
+    font-size: 35rpx;
+    color: #198f1f;
+}
+
+.body .btn {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.body .btn button {
+    width: 36%;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    font-size: 30rpx;
+    border: 1px solid #e5e5e5;
+    border-radius: 50rpx;
+    background: #eeeae7;
+}
+
+button::after {
+    border: 0;
+}
