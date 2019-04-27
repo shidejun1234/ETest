@@ -43,7 +43,7 @@
 }
 
 .body .title {
-    font-size: 35rpx;
+    font-weight: bold;
     margin-bottom: 20rpx;
 }
 
@@ -85,9 +85,23 @@
 .body .answer {
     width: 95%;
     margin: 30rpx;
-    margin-top: 0;
-    font-size: 35rpx;
+    font-size: 40rpx;
+    font-weight: bold;
+}
+
+.body .answer text {
+    font-size: 60rpx;
     color: #198f1f;
+}
+
+.body .analysis {
+    width: 95%;
+    margin: 30rpx;
+    font-size: 40rpx;
+}
+
+.body .analysis text{
+    font-weight: bold;
 }
 
 .body .btn {

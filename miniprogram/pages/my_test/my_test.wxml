@@ -1,4 +1,4 @@
-<view class='head'>我的试卷</view>
+<view class='head'>{{title}}</view>
 <view class='body'>
     <block wx:for='{{testList}}' wx:key='{{item.id}}'>
         <view class='test'>

@@ -1,20 +1,20 @@
 <view class='head'>{{subject.name}}</view>
-<view class='bar' bindtap='myTest'>
+<view class='bar' bindtap='myTest' data-key='all'>
     <image class='icon' src='../../images/test.png'></image>
     <view class='right'>
         <view class='top'>我的试卷</view>
         <view class='bottom'>记录测试过的试卷，可复卷</view>
     </view>
 </view>
-<view class='bar'>
+<view class='bar' bindtap='myTest' data-key='wrong'>
     <image class='icon' src='../../images/test-no.png'></image>
     <view class='right'>
         <view class='top'>我的错题</view>
         <view class='bottom'>统计测试过的错题，可再练</view>
     </view>
-    <image class='vip' src='../../images/VIP.png'></image>
+    <!-- <image class='vip' src='../../images/VIP.png'></image> -->
 </view>
-<button class='start green-bg' bindtap='showToast'>开始考试</button>
+<button class='start green-bg' bindtap='showToast'>开始{{keyType}}</button>
 <view class='toast' wx:if='{{showToast}}'>
     <view class='photo_wrap'>
         <image src='{{userInfo.avatarUrl}}'></image>
@@ -26,7 +26,7 @@
             <view class='right'>{{item.val}}</view>
         </view>
     </block>
-    <button bindtap='start'>开始考试</button>
+    <button bindtap='start'>开始{{keyType}}</button>
     <image class='cancel' src='../../images/cancel.png' bindtap='hiddenToast'></image>
 </view>
 <view class='mask' wx:if='{{showMask}}'></view>

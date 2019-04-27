@@ -12,7 +12,7 @@
     </view>
     <view class='options'>
         <block wx:for='{{filter.getOptions(testList[current].options)}}' wx:key='{{index}}'>
-            <view class='item' bindtap='check' data-key='{{item.key}}'>
+            <view class='item' data-key='{{item.key}}'>
                 <view wx:if='{{item.key==testList[current].checkAnswer}}'>
                     <image src='../../images/yes.png' wx:if='{{item.key==testList[current].answer}}'></image>
                     <image src='../../images/no.png' wx:else></image>
@@ -22,7 +22,7 @@
             </view>
         </block>
     </view>
-    <view class='answer' wx:if='{{testList[current].check}}'>
+    <view class='answer'>
         正确答案：
         <text>{{testList[current].answer}}</text>
     </view>

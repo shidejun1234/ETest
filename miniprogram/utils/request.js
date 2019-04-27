@@ -86,12 +86,18 @@ let setCurSubject = (cur_subject, id) => {
     });
 }
 
-let getTest = (subject) => {
+let getTest = (subject, type, user) => {
     return new Promise(function(resolve, reject) {
         wx.request({
             url: `${api}getTest`,
+            method: 'POST',
+            header: {
+                "content-type": "application/x-www-form-urlencoded"
+            },
             data: {
-                subject: subject
+                subject: subject,
+                type: type,
+                user,user
             },
             success: (res) => {
                 if (res) {
@@ -104,13 +110,19 @@ let getTest = (subject) => {
     });
 }
 
-let getQuestion = (subject, num) => {
+let getQuestion = (subject, num, key,user) => {
     return new Promise(function(resolve, reject) {
         wx.request({
             url: `${api}getQuestion`,
+            method: 'POST',
+            header: {
+                "content-type": "application/x-www-form-urlencoded"
+            },
             data: {
                 subject: subject,
-                num: num
+                num: num,
+                key: key,
+                user: user
             },
             success: (res) => {
                 if (res) {
@@ -145,7 +157,7 @@ let setTest = (list) => {
     });
 }
 
-let getMyText = (user, subject) => {
+let getMyText = (user, subject, type) => {
     return new Promise(function(resolve, reject) {
         wx.request({
             url: `${api}getMyText`,
@@ -155,7 +167,8 @@ let getMyText = (user, subject) => {
             },
             data: {
                 user: user,
-                subject: subject
+                subject: subject,
+                type: type
             },
             success: (res) => {
                 if (res) {
@@ -168,7 +181,7 @@ let getMyText = (user, subject) => {
     });
 }
 
-let getRewinding = (id) => {
+let getRewinding = (id, key) => {
     return new Promise(function(resolve, reject) {
         wx.request({
             url: `${api}getRewinding`,
@@ -177,7 +190,8 @@ let getRewinding = (id) => {
                 "content-type": "application/x-www-form-urlencoded"
             },
             data: {
-                id: id
+                id: id,
+                type: key
             },
             success: (res) => {
                 if (res) {
@@ -210,6 +224,30 @@ let searchQuestion = (key, subject) => {
     });
 }
 
+let feedback = (user, feedback, question = 0) => {
+    return new Promise(function(resolve, reject) {
+        wx.request({
+            url: `${api}feedback`,
+            method: 'POST',
+            header: {
+                "content-type": "application/x-www-form-urlencoded"
+            },
+            data: {
+                user: user,
+                feedback: feedback,
+                question: question
+            },
+            success: (res) => {
+                if (res) {
+                    resolve(res.data);
+                } else {
+                    reject('error');
+                }
+            }
+        });
+    });
+}
+
 module.exports = {
     getSubject: getSubject,
     getOpenId: getOpenId,
@@ -220,5 +258,6 @@ module.exports = {
     setTest: setTest,
     getMyText: getMyText,
     getRewinding: getRewinding,
-    searchQuestion: searchQuestion
+    searchQuestion: searchQuestion,
+    feedback: feedback
 }

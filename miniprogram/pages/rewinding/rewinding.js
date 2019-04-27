@@ -10,7 +10,7 @@ Page({
         current: 0,
         showFeedback: false,
         showMenu: false,
-        showMase: false,
+        showMask: false,
         amount: 0,
     },
 
@@ -19,13 +19,13 @@ Page({
             title: '试题加载中'
         })
         let testList = this.data.testList;
-        this.setTest(testList,options.id);
+        this.setTest(testList,options.id,options.key);
     },
 
-    setTest(testList,id) {
-        request.getRewinding(id)
+    setTest(testList,id,key) {
+        request.getRewinding(id,key)
             .then((res) => {
-                let question = JSON.parse(res.data.question)
+                let question = res.data;
                 this.setData({
                     testList: question,
                     total: question.length,
@@ -94,12 +94,20 @@ Page({
             });
             return;
         }
-        console.log(this.data.testList[this.data.current].id)
-        this.hiddenFeedback();
-        wx.showToast({
-            title: '提交成功',
-            icon: 'none'
-        });
+        let feedback = e.detail.value.feedback;
+        let question = this.data.testList[this.data.current].id;
+        let user = app.globalData.user
+        request.feedback(user, feedback, question)
+            .then((res) => {
+                this.hiddenFeedback();
+                wx.showToast({
+                    title: '提交成功',
+                    icon: 'none'
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     },
 
     prev() {
@@ -127,24 +135,6 @@ Page({
         }
         this.setData({
             current: current
-        });
-    },
-
-    check(e) {
-        let testList = this.data.testList;
-        let current = this.data.current;
-        let checkAnswerList = this.data.checkAnswerList;
-        if (testList[current].checkAnswer) {
-            return;
-        }
-        let key = e.currentTarget.dataset.key;
-        testList[current].check = true;
-        testList[current].checkAnswer = key;
-        checkAnswerList[current] = key;
-        this.setData({
-            testList: testList,
-            checkAnswerList: checkAnswerList,
-            amount: this.data.amount + 1
         });
     },
 

@@ -31,6 +31,9 @@
         <button bindtap='prev'>上一题</button>
         <button bindtap='next'>下一题</button>
     </view>
+    <view class='analysis' wx:if='{{testList[current].check}}'>
+        <text>试题解析：</text>{{testList[current].analysis}}
+    </view>
 </view>
 <view class='bottom'>
     <view class='left'>

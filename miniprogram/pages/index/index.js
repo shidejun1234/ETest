@@ -14,26 +14,42 @@ Page({
         red: false,
         showPer: false,
         showMask: true,
+        isLoading: true,
         optionsList: [{
             id: 1,
             name: '模拟考试',
             img: '../../images/test-bar.png',
-            url: '../test_ready/test_ready'
+            url: '../test_ready/test_ready?key=rand',
+            vip: false
         }, {
             id: 2,
             name: '快速搜题',
             img: '../../images/search-bar.png',
-            url: '../search/search'
+            url: '../search/search',
+            vip: false
+        }, {
+            id: 3,
+            name: '顺序练习',
+            img: '../../images/order-bar.png',
+            url: '../test_ready/test_ready?key=order',
+            vip: false
+        }, {
+            id: 4,
+            name: '顺序错题',
+            img: '../../images/wrong-bar.png',
+            url: '../test_ready/test_ready?key=wrong',
+            vip: false
         }]
+    },
+
+    reload() {
+        this.onShow();
     },
 
     onShow() {
         if (app.globalData.login === 1) {
             return;
         }
-        wx.showLoading({
-            title: '页面加载中'
-        })
         wx.login({
             success: (res) => {
                 request.getOpenId(res.code)
@@ -44,9 +60,9 @@ Page({
                                 if (!res.authSetting['scope.userInfo'] || !wx.getStorageSync('userInfo')) {
                                     this.setData({
                                         showPer: true,
-                                        showMask: true
+                                        showMask: true,
+                                        isLoading: false
                                     })
-                                    wx.hideLoading();
                                 } else {
                                     this.login(wx.getStorageSync('userInfo'));
                                 }
@@ -94,7 +110,7 @@ Page({
     },
 
     onGotUserInfo(e) {
-        if (app.globalData.login===0) {
+        if (app.globalData.login === 0) {
             this.setData({
                 showPer: false,
                 showMask: false
@@ -140,8 +156,7 @@ Page({
                     res.some((item, index) => {
                         if (item.id == cur_subject) {
                             this.setData({
-                                pIndex: index,
-                                showMask: false
+                                pIndex: index
                             })
                             app.globalData.subject = res[index];
                             return true;
@@ -151,7 +166,10 @@ Page({
             })
             .then(() => {
                 app.globalData.login = 1;
-                wx.hideLoading();
+                this.setData({
+                    isLoading: false,
+                    showMask: false
+                })
             })
             .catch(error => {
                 console.log(error)

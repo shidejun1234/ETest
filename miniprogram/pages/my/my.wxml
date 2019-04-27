@@ -14,8 +14,17 @@
     </view>
 </view>
 <view class='wode_item_wrap'>
-    <view class='wode_item' wx:for='{{mode}}' wx:key='*this'>
-        {{item}}
+    <view class='wode_item' wx:for='{{mode}}' wx:key='index' bindtap='{{item.fun}}'>
+        {{item.name}}
         <image src='../../images/icon-arrow.png'></image>
     </view>
 </view>
+<form class='feedback' wx:if='{{showFeedback}}' bindsubmit="doFeedback">
+    <text>意见反馈</text>
+    <textarea name='feedback' placeholder='请输入反馈内容' maxlength='-1' adjust-position='true'></textarea>
+    <view>
+        <button class='left' form-type="submit">提交</button>
+        <button class='right' bindtap='hiddenFeedback'>取消</button>
+    </view>
+</form>
+<view class='mask' wx:if='{{showMask}}'></view>

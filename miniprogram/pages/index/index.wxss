@@ -20,6 +20,7 @@
 
 .options {
     width: 100%;
+    height: 450rpx;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -27,17 +28,29 @@
 
 .options .item {
     width: 40%;
+    height: 350rpx;
     margin: 20rpx auto;
     padding: 20rpx;
     border: 1px solid #eee;
     border-radius: 20rpx;
     background: #fff;
+    position: relative;
 }
 
-.options .item image {
-    width: 80%;
+.options .item .img {
+    width: 240rpx;
+    height: 240rpx;
     display: block;
     margin: 20rpx auto;
+}
+
+.options .item .vip {
+    display: block;
+    width: 110rpx;
+    height: 110rpx;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 .bg {
@@ -84,4 +97,36 @@
     background: #000;
     opacity: 0.5;
     z-index: 98;
+}
+
+.loading {
+    width: 420rpx;
+    position: absolute;
+    top: 20%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 420rpx;
+    font-size: 30rpx;
+    border: 1px solid #e5e5e5;
+    border-radius: 10rpx;
+    background: #fff;
+    z-index: 99;
+    text-align: center;
+}
+
+.loading image{
+    display: block;
+    width: 150rpx;
+    height: 150rpx;
+    margin: 50rpx auto;
+}
+
+.loading button{
+    width: 100rpx;
+    height: 50rpx;
+    margin: 20rpx auto;
+    padding: 0;
+    font-size: 30rpx;
+    line-height: 55rpx;
 }

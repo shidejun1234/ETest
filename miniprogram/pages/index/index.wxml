@@ -6,8 +6,9 @@
     <view class='options'>
         <block wx:for='{{optionsList}}' wx:key='{{item.id}}'>
             <view class='item' bindtap='nav' data-url='{{item.url}}'>
-                <image src='{{item.img}}' mode='widthFix'></image>
+                <image class='img' src='{{item.img}}'></image>
                 <text>{{item.name}}</text>
+                <image class='vip' src='../../images/VIP.png' wx:if="{{item.vip}}"></image>
             </view>
         </block>
     </view>
@@ -18,3 +19,9 @@
     <button class='green-bg' open-type='getUserInfo' lang='zh_CN' bindgetuserinfo='onGotUserInfo'>一键微信授权</button>
 </view>
 <view class='mask' wx:if='{{showMask}}'></view>
+<view class='loading' wx:if="{{isLoading}}">
+    <image src='../../images/loading.gif'></image>
+    <view>加载中......</view>
+    <view>如果长时间加载，请点击</view>
+    <button class='green-bg' bindtap='reload'>刷新</button>
+</view>

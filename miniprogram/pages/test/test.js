@@ -12,7 +12,7 @@ Page({
         current: 0,
         showFeedback: false,
         showMenu: false,
-        showMase: false,
+        showMask: false,
         amount: 0,
         showNotice: false,
         showResult: false
@@ -25,15 +25,16 @@ Page({
         let test = JSON.parse(options.test);
         let time = 60 * test.time;
         this.setData({
-            test: test
+            test: test,
+            type: options.key
         });
         this.getTime(time);
         let testList = this.data.testList;
-        this.setTest(testList, test);
+        this.setTest(testList, test, options.key);
     },
 
-    setTest(testList, test) {
-        request.getQuestion(test.subject, test.num)
+    setTest(testList, test, key) {
+        request.getQuestion(test.subject, test.num, key,app.globalData.user)
             .then((res) => {
                 let answerList = [];
                 for (let i = 0; i < res.data.length; i++) {
@@ -95,7 +96,17 @@ Page({
         test.use_time = `${useM}分${useS}秒`;
         test.create_time = this.data.create_time;
         test.question = this.data.testList;
+        test.type = this.data.type
+        // console.log(this.data.testList)
+        // let wrong=[];
+        // this.data.testList.forEach((item)=>{
+        //     if (item.answer!=item.checkAnswer){
+        //         wrong.push(item);
+        //     }
+        // });
+        // console.log(wrong);
         let list = JSON.stringify(test);
+        // return;
         request.setTest(list);
     },
 
@@ -173,11 +184,20 @@ Page({
             });
             return;
         }
-        this.hiddenFeedback();
-        wx.showToast({
-            title: '提交成功',
-            icon: 'none'
-        });
+        let feedback = e.detail.value.feedback;
+        let question = this.data.testList[this.data.current].id;
+        let user = app.globalData.user
+        request.feedback(user, feedback, question)
+            .then((res) => {
+                this.hiddenFeedback();
+                wx.showToast({
+                    title: '提交成功',
+                    icon: 'none'
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     },
 
     prev() {
@@ -240,7 +260,14 @@ Page({
                 time: `${m}:${s}`
             });
             if (time == 0) {
-                clearInterval(time1)
+                clearInterval(time1);
+                this.submit({
+                    currentTarget: {
+                        dataset: {
+                            key: 'sub'
+                        }
+                    }
+                })
             }
             time -= 1;
         }, 1000);
