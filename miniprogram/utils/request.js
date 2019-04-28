@@ -194,6 +194,7 @@ let getRewinding = (id, key) => {
                 type: key
             },
             success: (res) => {
+                console.log(res)
                 if (res) {
                     resolve(res.data);
                 } else {

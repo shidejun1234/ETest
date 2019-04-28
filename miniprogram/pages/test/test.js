@@ -34,7 +34,7 @@ Page({
     },
 
     setTest(testList, test, key) {
-        request.getQuestion(test.subject, test.num, key,app.globalData.user)
+        request.getQuestion(test.subject, test.num, key, app.globalData.user)
             .then((res) => {
                 let answerList = [];
                 for (let i = 0; i < res.data.length; i++) {
@@ -95,18 +95,26 @@ Page({
         test.score = score;
         test.use_time = `${useM}分${useS}秒`;
         test.create_time = this.data.create_time;
-        test.question = this.data.testList;
+        let question = this.data.testList;
+        let question_ids = '';
+        let check_answer = [];
+        question.forEach(function(item, key) {
+            question_ids += item.id + ',';
+            if (checkAnswerList[key] == undefined) {
+                check_answer.push({
+                    answer: 0
+                })
+            } else {
+                check_answer.push({
+                    answer: checkAnswerList[key]
+                })
+            }
+        });
+        test.question_ids = question_ids.substr(0, question_ids.length - 1);
+        test.check_answer = JSON.stringify(check_answer);
         test.type = this.data.type
-        // console.log(this.data.testList)
-        // let wrong=[];
-        // this.data.testList.forEach((item)=>{
-        //     if (item.answer!=item.checkAnswer){
-        //         wrong.push(item);
-        //     }
-        // });
-        // console.log(wrong);
+        console.log(test);
         let list = JSON.stringify(test);
-        // return;
         request.setTest(list);
     },
 

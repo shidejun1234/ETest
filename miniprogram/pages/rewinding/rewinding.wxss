@@ -94,6 +94,16 @@
     color: #198f1f;
 }
 
+.body .analysis {
+    width: 95%;
+    margin: 30rpx;
+    font-size: 40rpx;
+}
+
+.body .analysis text {
+    font-weight: bold;
+}
+
 .body .btn {
     width: 80%;
     margin: 0 auto;

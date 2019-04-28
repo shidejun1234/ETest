@@ -30,5 +30,8 @@
         <view class='answer'>
             正确答案：{{item.answer}}
         </view>
+        <view class='answer'>
+            试题解析：<text style='color:#666666;'>{{item.analysis}}</text>
+        </view>
     </view>
 </block>
