@@ -62,7 +62,7 @@
     <scroll-view scroll-y='true'>
         <view class='items'>
             <block wx:for='{{testList}}' wx:key='{{index}}'>
-                <view class='item {{testList[index].checkAnswer!=""?"green-bg":""}}' bindtap='toTest' data-key='{{index}}'>{{index+1}}</view>
+                <view class='item {{filter.menu(testList[index].checkAnswer,testList[index].answer)?"green-bg":""}}' bindtap='toTest' data-key='{{index}}'>{{index+1}}</view>
             </block>
         </view>
     </scroll-view>

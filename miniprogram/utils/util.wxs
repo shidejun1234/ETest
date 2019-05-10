@@ -10,11 +10,15 @@ var filter = {
     },
     check1: function (key, answer) {
         return answer.indexOf(key) != -1;
+    },
+    menu:function(checkAnswer, answer){
+        return checkAnswer.length == JSON.parse(answer).length;
     }
 }
 module.exports = {
     getOptions: filter.getOptions,
     getAnswer: filter.getAnswer,
     check: filter.check,
-    check1: filter.check1
+    check1: filter.check1,
+    menu: filter.menu
 }

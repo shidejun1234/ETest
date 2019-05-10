@@ -18,7 +18,6 @@
 
 .head .type text {
     display: block;
-    width: 70%;
     height: 60rpx;
     font-size: 30rpx;
     border-radius: 30rpx;
