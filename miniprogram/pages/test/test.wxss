@@ -270,6 +270,12 @@ button::after {
     height: 50rpx;
 }
 
+.menu scroll-view{
+    position: absolute;
+    width: 100%;
+    height: 80%;
+}
+
 .menu .items {
     width: 100%;
     display: flex;

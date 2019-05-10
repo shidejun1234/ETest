@@ -8,7 +8,16 @@ Page({
      */
     data: {
         showToast: false,
-        showMask: false
+        showMask: false,
+        refresh: false
+    },
+
+    onShow() {
+        if (this.data.key == 'wrong'&&this.data.refresh) {
+            this.onLoad({
+                key: 'wrong'
+            })
+        }
     },
 
     /**
@@ -63,7 +72,7 @@ Page({
     },
 
     getQuestion(subject) {
-        request.getTest(subject.id,this.data.key,app.globalData.user)
+        request.getTest(subject.id, this.data.key, app.globalData.user)
             .then((res) => {
                 let test = res.data;
                 test.subject = subject.id;
@@ -82,7 +91,8 @@ Page({
                         key: '合格标准',
                         val: `满分${test.total}分，${test.qualified}分合格`
                     }],
-                    test: test
+                    test: test,
+                    refresh: true
                 });
             })
             .catch((error) => {

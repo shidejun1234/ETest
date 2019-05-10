@@ -15,8 +15,14 @@
 </view>
 <view class='wode_item_wrap'>
     <view class='wode_item' wx:for='{{mode}}' wx:key='index' bindtap='{{item.fun}}'>
-        {{item.name}}
-        <image src='../../images/icon-arrow.png'></image>
+        <button open-type="{{item.openType}}" wx:if='{{item.openType}}'>
+            {{item.name}}
+            <image src='../../images/icon-arrow.png'></image>
+        </button>
+        <button wx:else>
+            {{item.name}}
+            <image src='../../images/icon-arrow.png'></image>
+        </button>
     </view>
 </view>
 <form class='feedback' wx:if='{{showFeedback}}' bindsubmit="doFeedback">

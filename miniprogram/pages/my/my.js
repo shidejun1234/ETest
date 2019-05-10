@@ -11,8 +11,12 @@ Page({
             name: '意见反馈',
             fun: 'showFeedback'
         }, {
-            name: '关于我们',
-            fun: 'aboutMe'
+            name: '联系我们',
+            fun: 'contactMe'
+        }, {
+            name: '在线客服',
+            fun: 'callCenter',
+            openType: 'contact'
         }],
         showFeedback: false,
         showMask: false,
@@ -69,10 +73,10 @@ Page({
             })
     },
 
-    aboutMe() {
+    contactMe() {
         wx.showModal({
-            title: '关于我们',
-            content: '1160907561@qq.com',
+            title: '联系我们',
+            content: '如果想添加自己的题目可以发邮件\n\r1160907561@qq.com',
             showCancel: false
         })
     },

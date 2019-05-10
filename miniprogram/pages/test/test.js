@@ -8,7 +8,6 @@ Page({
     data: {
         testList: [],
         answerList: [],
-        checkAnswerList: [],
         current: 0,
         showFeedback: false,
         showMenu: false,
@@ -67,9 +66,20 @@ Page({
         }
         let score = 0;
         let answerList = this.data.answerList;
-        let checkAnswerList = this.data.checkAnswerList;
+        let checkAnswerList = this.data.testList;
         for (let i = 0; i < answerList.length; i++) {
-            if (answerList[i] === checkAnswerList[i]) {
+            var flag = true;
+            if (checkAnswerList[i].checkAnswer.length == JSON.parse(answerList[i]).length) {
+                checkAnswerList[i].checkAnswer.split('').forEach((item) => {
+                    if (answerList[i].indexOf(item) == -1) {
+                        flag = false;
+                        return false;
+                    }
+                });
+            } else {
+                flag = false;
+            }
+            if (flag) {
                 score += 1;
             }
         }
@@ -100,13 +110,13 @@ Page({
         let check_answer = [];
         question.forEach(function(item, key) {
             question_ids += item.id + ',';
-            if (checkAnswerList[key] == undefined) {
+            if (checkAnswerList[key].checkAnswer == undefined) {
                 check_answer.push({
                     answer: 0
                 })
             } else {
                 check_answer.push({
-                    answer: checkAnswerList[key]
+                    answer: checkAnswerList[key].checkAnswer
                 })
             }
         });
@@ -239,18 +249,20 @@ Page({
     check(e) {
         let testList = this.data.testList;
         let current = this.data.current;
-        let checkAnswerList = this.data.checkAnswerList;
-        if (testList[current].checkAnswer) {
+        if (testList[current].checkAnswer.length >= JSON.parse(this.data.answerList[current]).length) {
             return;
         }
+        if (testList[current].checkAnswer.length == JSON.parse(this.data.answerList[current]).length - 1) {
+            testList[current].check = true;
+            this.setData({
+                testList: testList,
+                amount: this.data.amount + 1
+            });
+        }
         let key = e.currentTarget.dataset.key;
-        testList[current].check = true;
-        testList[current].checkAnswer = key;
-        checkAnswerList[current] = key;
+        testList[current].checkAnswer += key;
         this.setData({
-            testList: testList,
-            checkAnswerList: checkAnswerList,
-            amount: this.data.amount + 1
+            testList: testList
         });
     },
 

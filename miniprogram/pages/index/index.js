@@ -79,7 +79,7 @@ Page({
     nav(e) {
         if (!(this.data.pIndex + 1)) {
             wx.showToast({
-                title: '请选择科目',
+                title: '未选择科目，\n\r请在最上方选择科目',
                 icon: 'none'
             })
             this.setData({

@@ -53,16 +53,22 @@
     background-color: #fff;
     margin-top: 10px;
     font-size: 14px;
-    border-top: 1px solid #e5e5e5;
 }
 
 .wode_item {
     font-size: 14px;
-    padding: 0 10px;
     height: 45px;
     line-height: 45px;
-    border-bottom: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
     position: relative;
+}
+
+.wode_item button{
+    width: 100%;
+    background: #ffffff;
+    padding-left: 10px;
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .wode_item image {
@@ -70,7 +76,7 @@
     height: 20px;
     position: absolute;
     top: 12px;
-    right: 10px;
+    right: 20px;
 }
 
 .feedback {

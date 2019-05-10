@@ -14,18 +14,20 @@
     <view class='options'>
         <block wx:for='{{filter.getOptions(testList[current].options)}}' wx:key='{{index}}'>
             <view class='item' bindtap='check' data-key='{{item.key}}'>
-                <view wx:if='{{item.key==testList[current].checkAnswer}}'>
-                    <image src='../../images/yes.png' wx:if='{{item.key==testList[current].answer}}'></image>
+                <view hidden='{{!filter.check1(item.key,testList[current].checkAnswer)}}'>
+                <!-- <view wx:if='{{item.key==testList[current].checkAnswer}}'> -->
+                    <image src='../../images/yes.png' wx:if='{{filter.check(item.key,testList[current].answer)}}'></image>
+                    <!-- <image src='../../images/yes.png' wx:if='{{item.key==testList[current].answer}}'></image> -->
                     <image src='../../images/no.png' wx:else></image>
                 </view>
                 <view class='key'>{{item.key}}</view>
-                <view class='val {{item.key==testList[current].checkAnswer?item.key==testList[current].answer?"green":"red":""}}'>{{item.val}}</view>
+                <view class='val {{filter.check1(item.key,testList[current].checkAnswer)?filter.check(item.key,testList[current].answer)?"green":"red":""}}'>{{item.val}}</view>
             </view>
         </block>
     </view>
     <view class='answer' wx:if='{{testList[current].check}}'>
         正确答案：
-        <text>{{testList[current].answer}}</text>
+        <text>{{filter.getAnswer(testList[current].answer)}}</text>
     </view>
     <view class='btn'>
         <button bindtap='prev'>上一题</button>
@@ -57,11 +59,13 @@
         <text>试题索引</text>
         <image src='../../images/cancel.png' bindtap='hiddenMenu'></image>
     </view>
-    <view class='items'>
-        <block wx:for='{{testList}}' wx:key='{{index}}'>
-            <view class='item {{testList[index].checkAnswer!=""?"green-bg":""}}' bindtap='toTest' data-key='{{index}}'>{{index+1}}</view>
-        </block>
-    </view>
+    <scroll-view scroll-y='true'>
+        <view class='items'>
+            <block wx:for='{{testList}}' wx:key='{{index}}'>
+                <view class='item {{testList[index].checkAnswer!=""?"green-bg":""}}' bindtap='toTest' data-key='{{index}}'>{{index+1}}</view>
+            </block>
+        </view>
+    </scroll-view>
 </view>
 <view class='notice' wx:if='{{showNotice}}'>
     <view class='top'>
@@ -86,7 +90,10 @@
     <view class='content'>
         <view wx:if='{{score>=80}}'>考试通过</view>
         <view wx:else>考试未通过，继续努力</view>
-        <view><text class='blue'>{{score}}</text><text class='orange'>分</text></view>
+        <view>
+            <text class='blue'>{{score}}</text>
+            <text class='orange'>分</text>
+        </view>
         <view>用时:{{useM}}分{{useS}}秒</view>
         <button bindtap='hiddenResult'>返回</button>
     </view>

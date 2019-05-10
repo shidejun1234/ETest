@@ -13,22 +13,25 @@
     <view class='options'>
         <block wx:for='{{filter.getOptions(testList[current].options)}}' wx:key='{{index}}'>
             <view class='item' data-key='{{item.key}}'>
-                <view wx:if='{{item.key==testList[current].checkAnswer}}'>
-                    <image src='../../images/yes.png' wx:if='{{item.key==testList[current].answer}}'></image>
+                <view hidden='{{!filter.check1(item.key,testList[current].checkAnswer)}}'>
+                    <image src='../../images/yes.png' wx:if='{{filter.check(item.key,testList[current].answer)}}'></image>
                     <image src='../../images/no.png' wx:else></image>
                 </view>
                 <view class='key'>{{item.key}}</view>
-                <view class='val {{item.key==testList[current].checkAnswer?item.key==testList[current].answer?"green":"red":""}}'>{{item.val}}</view>
+                <view class='val {{filter.check1(item.key,testList[current].checkAnswer)?filter.check(item.key,testList[current].answer)?"green":"red":""}}'>{{item.val}}</view>
             </view>
         </block>
     </view>
     <view class='answer'>
         正确答案：
-        <text>{{testList[current].answer}}</text>
+        <text>{{filter.getAnswer(testList[current].answer)}}</text>
     </view>
     <view class='btn'>
         <button bindtap='prev'>上一题</button>
         <button bindtap='next'>下一题</button>
+    </view>
+    <view class='analysis'>
+        <text>试题解析：</text>{{testList[current].analysis}}
     </view>
 </view>
 <view class='bottom'>

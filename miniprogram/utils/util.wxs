@@ -1,8 +1,20 @@
 var filter = {
     getOptions: function(options) {
         return JSON.parse(options);
+    },
+    getAnswer: function (answers) {
+        return JSON.parse(answers);
+    },
+    check: function (key, answer) {
+        return answer.indexOf(key) != -1;
+    },
+    check1: function (key, answer) {
+        return answer.indexOf(key) != -1;
     }
 }
 module.exports = {
-    getOptions: filter.getOptions
+    getOptions: filter.getOptions,
+    getAnswer: filter.getAnswer,
+    check: filter.check,
+    check1: filter.check1
 }
