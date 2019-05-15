@@ -13,7 +13,7 @@
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#8facc6",
         "navigationBarTitleText": "易考|模拟考试",
-        "navigationBarTextStyle": "write"
+        "navigationBarTextStyle": "white"
     },
     "tabBar": {
         "selectedColor": "#8facc6",
@@ -31,5 +31,6 @@
                 "selectedIconPath": "images/user_in.png"
             }
         ]
-    }
+    },
+    "sitemapLocation": "sitemap.json"
 }

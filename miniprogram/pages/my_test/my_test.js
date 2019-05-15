@@ -21,7 +21,7 @@ Page({
         wx.setNavigationBarTitle({
             title: app.globalData.subject.name
         })
-        request.getMyText(app.globalData.user, app.globalData.subject.id, options.type)
+        request.getMyText(app.globalData.user, app.globalData.subject.id, options.type, options.key)
             .then((res) => {
                 this.setData({
                     key: options.key,

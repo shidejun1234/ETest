@@ -157,7 +157,7 @@ let setTest = (list) => {
     });
 }
 
-let getMyText = (user, subject, type) => {
+let getMyText = (user, subject, type,key) => {
     return new Promise(function(resolve, reject) {
         wx.request({
             url: `${api}getMyText`,
@@ -168,7 +168,8 @@ let getMyText = (user, subject, type) => {
             data: {
                 user: user,
                 subject: subject,
-                type: type
+                type: type,
+                key: key
             },
             success: (res) => {
                 if (res) {
