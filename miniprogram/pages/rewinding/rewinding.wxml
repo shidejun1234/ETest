@@ -6,7 +6,7 @@
     <view class='pages'>
         <text>{{current+1}}</text>/{{total}}</view>
 </view>
-<view class='body'>
+<scroll-view scroll-y class='body'>
     <view class='title'>
         {{testList[current].title}}
     </view>
@@ -33,7 +33,7 @@
     <view class='analysis'>
         <text>试题解析：</text>{{testList[current].analysis}}
     </view>
-</view>
+</scroll-view>
 <view class='bottom'>
     <view class='left'>
         <image src='../../images/feedback.png' bindtap='showFeedback'></image>
@@ -55,10 +55,12 @@
         <text>试题索引</text>
         <image src='../../images/cancel.png' bindtap='hiddenMenu'></image>
     </view>
-    <view class='items'>
-        <block wx:for='{{testList}}' wx:key='{{index}}'>
-            <view class='item {{testList[index].checkAnswer!=""?"green-bg":""}}' bindtap='toTest' data-key='{{index}}'>{{index+1}}</view>
-        </block>
-    </view>
+    <scroll-view scroll-y='true'>
+        <view class='items'>
+            <block wx:for='{{testList}}' wx:key='{{index}}'>
+                <view class='item {{testList[index].checkAnswer!=""?"green-bg":""}}' bindtap='toTest' data-key='{{index}}'>{{index+1}}</view>
+            </block>
+        </view>
+    </scroll-view>
 </view>
 <view class='mask' wx:if='{{showMask}}'></view>

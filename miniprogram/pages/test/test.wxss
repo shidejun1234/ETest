@@ -37,8 +37,12 @@
 
 .body {
     width: 90%;
+    position: absolute;
+    top: 130rpx;
+    bottom: 100rpx;
+    left: 5%;
+    right: 5%;
     margin: 0 auto;
-    margin-top: 20rpx;
 }
 
 .body .title {
@@ -136,6 +140,7 @@ button::after {
     display: flex;
     z-index: 1;
     flex-direction: row;
+    background: #ffffff;
     border-top: 1px solid #e5e5e5;
 }
 
@@ -272,7 +277,8 @@ button::after {
 .menu scroll-view{
     position: absolute;
     width: 100%;
-    height: 80%;
+    top: 10%;
+    bottom: 5%;
 }
 
 .menu .items {

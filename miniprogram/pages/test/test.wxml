@@ -7,7 +7,7 @@
     <view class='pages'>
         <text>{{current+1}}</text>/{{total}}</view>
 </view>
-<view class='body'>
+<scroll-view scroll-y class='body'>
     <view class='title'>
         {{testList[current].title}}
     </view>
@@ -36,7 +36,7 @@
     <view class='analysis' wx:if='{{testList[current].check}}'>
         <text>试题解析：</text>{{testList[current].analysis}}
     </view>
-</view>
+</scroll-view>
 <view class='bottom'>
     <view class='left'>
         <image src='../../images/feedback.png' bindtap='showFeedback'></image>

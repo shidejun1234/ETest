@@ -6,9 +6,11 @@ var filter = {
         return JSON.parse(answers);
     },
     check: function (key, answer) {
+        if (answer)
         return answer.indexOf(key) != -1;
     },
     check1: function (key, answer) {
+        if (answer)
         return answer.indexOf(key) != -1;
     },
     menu:function(checkAnswer, answer){
