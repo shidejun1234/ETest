@@ -7,7 +7,6 @@ Page({
 
     data: {
         testList: [],
-        answerList: [],
         current: 0,
         showFeedback: false,
         showMenu: false,
@@ -35,17 +34,14 @@ Page({
     setTest(testList, test, key) {
         request.getQuestion(test.subject, test.num, key, app.globalData.user)
             .then((res) => {
-                let answerList = [];
                 for (let i = 0; i < res.data.length; i++) {
                     testList[i] = res.data[i];
                     testList[i].check = false;
                     testList[i].checkAnswer = '';
-                    answerList[i] = res.data[i].answer;
                 }
                 this.setData({
                     testList: testList,
                     total: testList.length,
-                    answerList: answerList,
                     create_time: nowTime.formatTime(new Date())
                 });
                 wx.hideLoading();
@@ -65,13 +61,12 @@ Page({
             this.hiddenNotice();
         }
         let score = 0;
-        let answerList = this.data.answerList;
-        let checkAnswerList = this.data.testList;
-        for (let i = 0; i < answerList.length; i++) {
+        let testList = this.data.testList;
+        for (let i = 0; i < testList.length; i++) {
             var flag = true;
-            if (checkAnswerList[i].checkAnswer.length == JSON.parse(answerList[i]).length) {
-                checkAnswerList[i].checkAnswer.split('').forEach((item) => {
-                    if (answerList[i].indexOf(item) == -1) {
+            if (testList[i].checkAnswer.length == JSON.parse(testList[i].answer).length) {
+                testList[i].checkAnswer.split('').forEach((item) => {
+                    if (testList[i].answer.indexOf(item) == -1) {
                         flag = false;
                         return false;
                     }
@@ -83,7 +78,7 @@ Page({
                 score += 1;
             }
         }
-        score = score / answerList.length * 100;
+        score = score / testList.length * 100;
         score = Math.round(score);
         this.showResult();
         clearInterval(time1);
@@ -110,22 +105,24 @@ Page({
         let check_answer = [];
         question.forEach(function(item, key) {
             question_ids += item.id + ',';
-            if (checkAnswerList[key].checkAnswer == undefined) {
+            if (testList[key].checkAnswer == undefined) {
                 check_answer.push({
                     answer: 0
                 })
             } else {
                 check_answer.push({
-                    answer: checkAnswerList[key].checkAnswer
+                    answer: testList[key].checkAnswer
                 })
             }
         });
         test.question_ids = question_ids.substr(0, question_ids.length - 1);
         test.check_answer = JSON.stringify(check_answer);
         test.type = this.data.type
-        console.log(test);
+        // console.log(test);
         let list = JSON.stringify(test);
-        request.setTest(list);
+        if (app.globalData.login) {
+            request.setTest(list);
+        }
     },
 
     showResult() {
@@ -249,21 +246,21 @@ Page({
     check(e) {
         let testList = this.data.testList;
         let current = this.data.current;
-        if (testList[current].checkAnswer.length >= JSON.parse(this.data.answerList[current]).length) {
+        if (testList[current].checkAnswer.length >= JSON.parse(testList[current].answer).length) {
             return;
         }
-        if (testList[current].checkAnswer.length == JSON.parse(this.data.answerList[current]).length - 1) {
-            testList[current].check = true;
+        if (testList[current].checkAnswer.length == JSON.parse(testList[current].answer).length - 1) {
+            let t = `testList[${current}].check`
             this.setData({
-                testList: testList,
+                [t]: true,
                 amount: this.data.amount + 1
             });
         }
         let key = e.currentTarget.dataset.key;
-        testList[current].checkAnswer += key;
+        let ca = `testList[${current}].checkAnswer`;
         this.setData({
-            testList: testList
-        });
+            [ca]: testList[current].checkAnswer + key
+        })
     },
 
     getTime(time) {
