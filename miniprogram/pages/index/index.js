@@ -43,10 +43,10 @@ Page({
     },
 
     reload() {
-        this.onShow();
+        this.onLoad();
     },
 
-    onShow() {
+    onLoad() {
         if (app.globalData.login === 1) {
             return;
         }
@@ -55,6 +55,7 @@ Page({
                 request.getOpenId(res.code)
                     .then(res => {
                         openid = res.data.openid;
+                        app.globalData.openid = openid;
                         wx.getSetting({
                             success: (res) => {
                                 if (!res.authSetting['scope.userInfo'] || !wx.getStorageSync('userInfo')) {
@@ -100,9 +101,6 @@ Page({
             red: false
         });
         request.setCurSubject(this.data.testList[key].id, id)
-            .then(res => {
-                console.log(res)
-            })
             .catch(error => {
                 console.log(error);
             })
@@ -120,10 +118,16 @@ Page({
                 this.login(userInfo);
                 wx.setStorageSync('userInfo', userInfo);
             } else {
-                this.setData({
-                    showMask: true
+                openid = '';
+                wx.showToast({
+                    title: '未授权，不会记录考试',
+                    icon:'none'
                 })
-                this.onShow();
+                this.login({});
+                // this.setData({
+                //     showMask: true
+                // })
+                // this.onShow();
             }
         }
     },
@@ -131,11 +135,11 @@ Page({
     login(userInfo) {
         request.login(openid, userInfo)
             .then(res => {
+                console.log(1)
                 id = res.data.id;
+                // console.log(res)
                 app.globalData.user = id;
                 cur_subject = res.data.cur_subject;
-            })
-            .then(() => {
                 return request.getSubject()
             })
             .then(res => {
