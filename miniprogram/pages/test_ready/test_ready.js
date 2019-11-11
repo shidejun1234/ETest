@@ -57,9 +57,9 @@ Page({
             success: (res) => {
                 if (!res.authSetting['scope.userInfo'] || !wx.getStorageSync('userInfo')) {
                     app.globalData.login = 0;
-                    wx.switchTab({
-                        url: '../index/index',
-                    })
+                    // wx.switchTab({
+                    //     url: '../index/index',
+                    // })
                 } else {
                     this.setData({
                         userInfo: wx.getStorageSync('userInfo')
