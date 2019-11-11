@@ -83,12 +83,26 @@ Page({
 
     onGotUserInfo: function(e) {
         if (e.detail.userInfo) {
+            app.globalData.login = 1;
             wx.setStorageSync('userInfo', e.detail.userInfo);
             this.setData({
                 userInfo: e.detail.userInfo,
                 isLogin: true
             });
+            this.login(e.detail.userInfo);
         }
+    },
+
+    login(userInfo) {
+        request.login(app.globalData.openid, userInfo)
+            .then(res => {
+                let id = res.data.id;
+                app.globalData.user = id;
+                app.globalData.login = 1;
+            })
+            .catch(error => {
+                console.log(error)
+            });
     },
 
     trim(str) {
